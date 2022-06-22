@@ -45,7 +45,7 @@
 
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin.faq')}}" class="nav-link">
+                    <a href="{{route('admin.faq.all')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Faq

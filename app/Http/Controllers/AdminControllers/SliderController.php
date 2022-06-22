@@ -12,14 +12,19 @@ use RealRashid\SweetAlert\Facades\Alert;
 class SliderController extends Controller
 {
     use  ImagesTriat;
+
+    public  function  index()
+    {
+        $sliders =  Slider::all();
+
+        return view('Admin.pages.slider.sliders',compact('sliders'));
+    }
    public function  create()
    {
        return view('Admin.pages.slider.createSlider');
    }
-
    public  function  store(Request $request)
    {
-
 
         $fileName = time() . '_slider.jpg';
         $this->UploadImage($request->image,$fileName,'slider');
@@ -32,7 +37,6 @@ class SliderController extends Controller
         );
         Alert::success('Create Slider' , "Uploaded Successfuly !");
         return redirect()->back();
-
 
    }
 

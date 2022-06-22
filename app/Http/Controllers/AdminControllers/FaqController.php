@@ -33,7 +33,7 @@ class FaqController extends Controller
         session()->flash('done' , 'Faq Was Created');
         Alert::success('Success Title', 'Success Message');
 
-        return redirect(route('admin.faq.create'));
+        return redirect(route('admin.faq.all.create'));
     }
     public  function  edit($faqId)
     {
@@ -53,7 +53,7 @@ class FaqController extends Controller
             ]);
 
         Alert::success('Update Faq', 'Update Faq Successfuly !');
-        return redirect(route('admin.faq'));
+        return redirect(route('admin.faq.all'));
 
     }
     public  function  delete(DeleteFaqRequest $request)
@@ -61,6 +61,6 @@ class FaqController extends Controller
         Faq::where('id',$request->faq_id)->delete();
         Alert::warning('Delete Faq', 'Delete Faq');
 
-        return redirect(route('admin.faq'));
+        return redirect(route('admin.faq.all'));
     }
 }
