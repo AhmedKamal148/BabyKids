@@ -1,6 +1,6 @@
 @extends('Admin.adminMaster')
 @section('content')
-<div class="row">
+<div class="row ">
     <!-- left column -->
     <div class="col ">
         <!-- general form elements -->

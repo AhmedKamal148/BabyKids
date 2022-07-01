@@ -1,6 +1,4 @@
 @extends('Admin.adminMaster')
-
-
 @section('content')
               <!-- Small boxes (Stat box) -->
               <div class="row">
@@ -66,6 +64,5 @@
                   <!-- ./col -->
               </div>
               <!-- /.row -->
-
           @endsection
 

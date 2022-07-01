@@ -52,7 +52,39 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.slider.all')}}" class="nav-link ">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                            Slider
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.teacher.all')}}" class="nav-link ">
+                        <i class=" nav-icon fas fa-user-circle"></i>
+                        <p>
+                            Teacher
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.course.all')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-graduation-cap"></i>
+                        <p>
+                            Course
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.activite.all')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-bolt"></i>
 
+                        <p>
+                            Activite
+                        </p>
+                    </a>
+                </li>
 
             </ul>
         </nav>
