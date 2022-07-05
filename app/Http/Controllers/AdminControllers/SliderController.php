@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Interfaces\AdminSliderInterface;
 use App\Http\Requests\Slider\CreateSliderRequest;
 use App\Http\Requests\Slider\DeleteSliderRequest;
 use App\Http\Requests\Slider\UpdateSliderRequest;
@@ -13,67 +14,35 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class SliderController extends Controller
 {
-    use  ImagesTriat;
 
+    public  $adminSliderRepo;
+
+    public function __construct(AdminSliderInterface $adminSliderRepo)
+    {
+        $this->adminSliderRepo = $adminSliderRepo;
+    }
     public  function  index()
     {
-        $sliders =  Slider::get();
-//    dd($sliders);
-        return view('Admin.pages.slider.sliders',compact('sliders'));
+        return $this->adminSliderRepo->index();
     }
    public function  create()
    {
-       return view('Admin.pages.slider.createSlider');
+       return $this->adminSliderRepo->create();
    }
    public  function  store(CreateSliderRequest $request)
    {
-
-        $fileName = time() . '_slider.jpg';
-        $this->UploadImage($request->image,$fileName,'slider');
-
-       //$file->move(public_path('images/slider'),$fileName);
-        Slider::create(
-            [
-                'image' => $fileName,
-            ]
-        );
-        Alert::success('Create Slider' , "Uploaded Successfuly !");
-        return redirect()->back();
-
+       return $this->adminSliderRepo->store($request);
    }
-
-
    public  function  edit($id)
    {
-       $slider = Slider::find($id);
-
-       return view('Admin.pages.slider.editSlider',compact('slider'));
+       return $this->adminSliderRepo->edit($id);
    }
-
    public  function update(UpdateSliderRequest $request)
    {
-       $slider =  Slider::find($request->slider_id);
-       $fileName = time() .'_slider.jpg';
-
-       $this->UploadImage($request->image,$fileName,'slider',$slider->image_url);
-
-       $slider->update(
-           [
-               'image' => $fileName,
-           ]
-       );
-       Alert::success('Update Slider' , "Updated Successfuly !");
-       return redirect(route('admin.slider.all'));
-
-
+       return $this->adminSliderRepo->update($request);
    }
    public  function  delete(DeleteSliderRequest $request)
    {
-       $slider = Slider::find($request->slider_id);
-       unlink(public_path($slider->image));
-       $slider->delete();
-       Alert::error('Delete Slider' ,"Deleted Successfuly !");
-       return redirect(route('admin.slider.all'));
+       return $this->adminSliderRepo->delete($request);
    }
-
 }
