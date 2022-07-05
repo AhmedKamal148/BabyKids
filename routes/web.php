@@ -78,6 +78,7 @@ Route::group(['prefix'=>'admin' , 'as' =>'admin.','middleware'=>'auth' ],functio
     Route::group(['prefix'=>'teacher', 'as' => 'teacher.'],function()
     {
         Route::get('',                     [TeacherController::class,'index'])->name('all');
+        Route::get('teachers',             [TeacherController::class,'teacher']);
         Route::get('create',               [TeacherController::class,'create'])->name('create');
         Route::post('store',               [TeacherController::class,'store'])->name('store');
         Route::get('edit/{teacher_id}',    [TeacherController::class,'edit'])->name('edit');

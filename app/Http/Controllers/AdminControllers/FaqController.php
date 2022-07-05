@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Interfaces\AdminFaqInterface;
 use App\Http\Requests\Faq\CreateFaqRequest;
 use App\Http\Requests\Faq\DeleteFaqRequest;
 use App\Http\Requests\Faq\UpdateFaqRequest;
@@ -11,56 +12,43 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class FaqController extends Controller
 {
+
+    public  $adminFaqRepo;
+
+    public function __construct(AdminFaqInterface $adminFaqRepo)
+    {
+        $this->adminFaqRepo = $adminFaqRepo;
+    }
+
     public  function  index ()
     {
-        $faqs = Faq::get();
-        return view('Admin.pages.faq.faqs',compact('faqs'));
+       return   $this->adminFaqRepo->index();
     }
     public  function  create()
     {
-        return view('Admin.pages.faq.createFaq');
+        return   $this->adminFaqRepo->create();
+
     }
     public  function  store(CreateFaqRequest $request)
     {
 
-        Faq::create(
-            [
-                'question' => $request->question,
-                'answer'=>$request->answer,
+        return   $this->adminFaqRepo->store($request);
 
-            ]
-        );
-        session()->flash('done' , 'Faq Was Created');
-        Alert::success('Success Title', 'Success Message');
-
-        return redirect(route('admin.faq.all.create'));
     }
     public  function  edit($faqId)
     {
-        $faq = Faq::find($faqId);
+        return   $this->adminFaqRepo->edit($faqId);
 
-        return view('Admin.pages.faq.editFaq',compact('faq'));
     }
 
     public  function update(UpdateFaqRequest $request)
     {
-        $faq = Faq::find($request->faqId);
-
-        $faq->update(
-            [
-                    'question'=>$request->question,
-                    'answer'=>$request->answer,
-            ]);
-
-        Alert::success('Update Faq', 'Update Faq Successfuly !');
-        return redirect(route('admin.faq.all'));
+        return   $this->adminFaqRepo->update($request);
 
     }
     public  function  delete(DeleteFaqRequest $request)
     {
-        Faq::where('id',$request->faq_id)->delete();
-        Alert::warning('Delete Faq', 'Delete Faq');
+        return   $this->adminFaqRepo->delete($request);
 
-        return redirect(route('admin.faq.all'));
     }
 }

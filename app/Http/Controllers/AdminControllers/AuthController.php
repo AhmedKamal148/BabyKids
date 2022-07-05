@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Interfaces\AdminAuthInterface;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,32 +12,27 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthController extends Controller
 {
-    public  function index()
-  {
-      return view('Admin.pages.login');
-  }
+     public  $adminAuthRepo;
 
+     public function __construct(AdminAuthInterface $adminAuthRepo)
+     {
+         $this->adminAuthRepo = $adminAuthRepo;
+     }
+
+    public  function index()
+    {
+//        return view('Admin.pages.login');
+
+     return  $this->adminAuthRepo->index();
+    }
 
     public  function login(LoginRequest $request)
     {
-        $credentails  = $request->only('email','password');
-
-        if(Auth::attempt($credentails))
-        {
-         return redirect(route('admin.Home'));
-        }else
-        {
-            Alert::error('login Faild' , "Please Try Again !");
-            return redirect()->back();
-        }
+        return  $this->adminAuthRepo->login($request);
     }
-
-
 
     public  function logout(Request $request)
     {
-        Session::flush();
-        Auth::logout();
-        return redirect(route('admin.loginPage'));
+        return  $this->adminAuthRepo->logout($request);
     }
 }

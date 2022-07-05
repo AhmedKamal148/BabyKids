@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Interfaces\AdminCourseInterface;
 use App\Http\Requests\Course\CreateCourseRequest;
 use App\Http\Requests\Course\DeleteCourseRequest;
 use App\Http\Requests\Course\UpdateCourseRequest;
@@ -12,76 +13,35 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class CourseController extends Controller
 {
-    use ImagesTriat;
+    public $adminCourseRepo;
+
+    public function __construct(AdminCourseInterface $adminCourseRepo)
+    {
+        return  $this->adminCourseRepo = $adminCourseRepo;
+    }
 
     public  function  index()
     {
-        $courses = Course::get();
-        return  'sss';
-        return view('Admin.pages.course.courses',compact('courses'));
+        return  $this->adminCourseRepo->index();
     }
-
     public  function  create()
     {
-        return view('Admin.pages.course.createCourse');
+        return  $this->adminCourseRepo->create();
     }
-
     public  function  store(CreateCourseRequest $request)
     {
-        $file = $request->course_image;
-        $fileName = time() . '_course.jpg';
-        $this->UploadImage($file,$fileName,'course');
-
-        Course::create(
-            [
-                'name'=>$request->course_name,
-                'price'=> floatval($request->course_price),
-                'description'=>$request->course_description,
-                'image' => $fileName,
-
-        ]
-        );
-        Alert::success('Create Course ' , "Created Successfuly !");
-        return redirect()->back();
+        return   $this->adminCourseRepo->store($request);
     }
     public  function  edit($course_id)
     {
-        $course = Course::find($course_id);
-
-        return view('Admin.pages.course.editCourse',compact('course'));
+        return   $this->adminCourseRepo->edit($course_id);
     }
-
     public  function  update(UpdateCourseRequest $request)
     {
-        $course = Course::find($request->course_id);
-        if($request->has('course_image'))
-        {
-            $imageName = time() . '_course' . $request->course_image->extension();
-            $this->UploadImage($request->course_image , $imageName , 'course',$course->image);
-        }
-
-        $course->update(
-            [
-                'name' =>               $request->course_name,
-                'price' =>              $request->course_price,
-                'description' =>        $request->course_description,
-                'image' =>              (isset($request->course_image)) ? $imageName : $course->image,
-            ]
-        );
-//
-        Alert::success('Course Update' , 'Course Updated Successfuly !');
-        return redirect(route('admin.course.all'));
-
+        return $this->adminCourseRepo->update($request);
     }
     public  function  delete(DeleteCourseRequest $request)
     {
-        $course = Course::find($request->course_id);
-        unlink(public_path($course->image));
-        $course->delete();
-
-        Alert::error('Delete Course', 'Deleted Successfuly !');
-        return redirect()->back();
-
-
+        return $this->adminCourseRepo->delete($request);
     }
 }

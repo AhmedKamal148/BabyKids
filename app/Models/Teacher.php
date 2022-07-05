@@ -14,6 +14,7 @@ class Teacher extends Model
         [
             'name','price','description' ,'image','course_id'
         ];
+
     protected $appends = ['image_url'];
 
 
@@ -40,11 +41,24 @@ class Teacher extends Model
 
     }
 
-    //accor
+    //accssor
     public function getImageUrlAttribute()
     {
         return 'images\teacher\\' . $this->image;
     }
 
-    //
+    /* **************** Relations **************** */
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class,'course_id','id');
+    }
+
+
+ /*
+    public function allCourses()
+    {
+        return $this->belongsToMany(Course::class,'courses','course_id','id');
+    }
+ */
 }

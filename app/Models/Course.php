@@ -46,4 +46,15 @@ class Course extends Model
     {
         return 'images\course\\' . $this->image;
     }
+
+    /************ Relations ************/
+
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class,'course_id','id');
+    }
+    public  function allTeacher()
+    {
+        return $this->hasMany(Teacher::class,'course_id','id');
+    }
 }

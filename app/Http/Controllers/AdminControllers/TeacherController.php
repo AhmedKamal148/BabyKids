@@ -9,7 +9,6 @@ use App\Http\Traits\ImagesTriat;
 use App\Models\Course;
 use App\Http\Requests\Teacher\CreateTeacherRequest;
 use App\Models\Teacher;
-use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -19,11 +18,13 @@ class TeacherController extends Controller
     public  function index()
     {
 
-        $teachers = Teacher::all();
-        $courses  = Course::get();
+        $teachers = Teacher::with('course:id,name')->select(['name','course_id'])->get();
+        dd($teachers);
+
+//        $courses  = Course::get();
         return view('Admin.pages.teacher.teachers',compact('teachers','courses'));
     }
-    public  function  create()
+    public  function create()
     {
         $courses = Course::all();
         return view('Admin.pages.teacher.createTeacher',compact('courses'));
@@ -52,7 +53,7 @@ class TeacherController extends Controller
         $courses = Course::get();
         return view('Admin.pages.teacher.editTeacher',compact('teacher','courses'));
     }
-    public function update(UpdateTeacherRequest $request)
+    public function  update(UpdateTeacherRequest $request)
     {
         $teacher  = Teacher::find($request->teacher_id);
         if($request->has('image'))
@@ -85,4 +86,9 @@ class TeacherController extends Controller
         $teacher->delete();
         return redirect(route('admin.teacher.all'));
     }
+
+
+
+
 }
+
