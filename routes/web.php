@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AdminControllers\ActiviteController;
+use App\Http\Controllers\AdminControllers\ActivityController;
 use App\Http\Controllers\AdminControllers\AdminHomeController;
 use App\Http\Controllers\AdminControllers\AuthController;
 use App\Http\Controllers\AdminControllers\CourseController;
@@ -100,12 +100,12 @@ Route::group(['prefix'=>'admin' , 'as' =>'admin.','middleware'=>'auth' ],functio
     /*****************************        Activties            **********************************/
     Route::group(['prefix'=>'activite', 'as' => 'activite.'],function()
     {
-        Route::get('',                    [ActiviteController::class,'index'])->name('all');
-        Route::get('create',              [ActiviteController::class,'create'])->name('create');
-        Route::post('store',              [ActiviteController::class,'store'])->name('store');
-        Route::get('edit/{activite_id}',  [ActiviteController::class,'edit'])->name('edit');
-        Route::put('update',              [ActiviteController::class,'update'])->name('update');
-        Route::delete('delete',           [ActiviteController::class,'delete'])->name('delete');
+        Route::get('',                    [ActivityController::class,'index'])->name('all');
+        Route::get('create',              [ActivityController::class,'create'])->name('create');
+        Route::post('store',              [ActivityController::class,'store'])->name('store');
+        Route::get('edit/{activite_id}',  [ActivityController::class,'edit'])->name('edit');
+        Route::put('update',              [ActivityController::class,'update'])->name('update');
+        Route::delete('delete',           [ActivityController::class,'delete'])->name('delete');
     });
     /********************************************************************************************/
 });
