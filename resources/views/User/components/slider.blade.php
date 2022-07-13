@@ -1,14 +1,11 @@
 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
     <div class="carousel-inner">
+        @foreach($sliders as $slider)
         <div class="carousel-item active">
-            <img src="{{ asset('EndUserAssets/images/10.jpg') }}" class="d-block w-100" alt="...">
+            <img src="{{ asset($slider->imageUrl) }}" class="d-block w-100" alt="...">
         </div>
-        <div class="carousel-item">
-            <img src="{{ asset('EndUserAssets/images/11.jpg') }}" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="{{ asset('EndUserAssets/images/9.jpg') }}" class="d-block w-100" alt="...">
-        </div>
+        @endforeach
+
     </div>
     <button class="carousel-control-prev" type="button" data-target="#carouselExampleFade" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

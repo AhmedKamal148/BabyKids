@@ -17,7 +17,7 @@ class CourseController extends Controller
 
     public function __construct(AdminCourseInterface $adminCourseRepo)
     {
-        return  $this->adminCourseRepo = $adminCourseRepo;
+          $this->adminCourseRepo = $adminCourseRepo;
     }
 
     public  function  index()

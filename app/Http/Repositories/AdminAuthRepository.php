@@ -4,6 +4,7 @@ namespace  App\Http\Repositories;
 use App\Http\Interfaces\AdminAuthInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminAuthRepository implements AdminAuthInterface
 {

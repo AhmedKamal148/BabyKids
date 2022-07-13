@@ -2,30 +2,30 @@
 
 namespace App\Http\Repositories;
 
+use App\Http\Interfaces\AdminTeacherInterface;
 use App\Http\Requests\Teacher\CreateTeacherRequest;
 use App\Http\Requests\Teacher\DeleteTeacherRequest;
 use App\Http\Requests\Teacher\UpdateTeacherRequest;
 use App\Http\Traits\ImagesTriat;
+
 use App\Models\Course;
 use App\Models\Teacher;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class  AdminTeacherRepository
+class  AdminTeacherRepository implements AdminTeacherInterface
 {
     use ImagesTriat;
     public  function index()
     {
-
-        $teachers = Teacher::with('course:id,name')->select(['name','course_id'])->get();
-        dd($teachers);
-        return view('Admin.pages.teacher.teachers',compact('teachers','courses'));
+        $teachers = Teacher::with('course')->get();
+        return view('Admin.pages.teacher.teachers',compact('teachers'));
     }
     public  function create()
     {
         $courses = Course::all();
         return view('Admin.pages.teacher.createTeacher',compact('courses'));
     }
-    public  function store(CreateTeacherRequest $request)
+    public  function store($request)
     {
         $image = $request->image;
         $imageName = time() .'_teacher.jpg' ;
@@ -49,7 +49,7 @@ class  AdminTeacherRepository
         $courses = Course::get();
         return view('Admin.pages.teacher.editTeacher',compact('teacher','courses'));
     }
-    public function  update(UpdateTeacherRequest $request)
+    public function  update($request)
     {
         $teacher  = Teacher::find($request->teacher_id);
         if($request->has('image'))
@@ -75,7 +75,7 @@ class  AdminTeacherRepository
         Alert::success('Update Teacher' , "Update Successfuly !");
         return redirect(route('admin.teacher.all'));
     }
-    public function  delete(DeleteTeacherRequest $request)
+    public function  delete($request)
     {
         $teacher = Teacher::find($request->teacher_id);
         unlink($teacher->image_url);

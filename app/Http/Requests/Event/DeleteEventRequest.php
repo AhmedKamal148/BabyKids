@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Activite;
+namespace App\Http\Requests\Event;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeleteActiviteRequest extends FormRequest
+class DeleteEventRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

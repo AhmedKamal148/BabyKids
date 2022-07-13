@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Activite;
+namespace App\Http\Requests\Activity;
 
+use App\Models\Activity;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateActiviteRequest extends FormRequest
+class DeleteActiviteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class CreateActiviteRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +24,6 @@ class CreateActiviteRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return Activity::DeleteActiviteRequest();
     }
 }

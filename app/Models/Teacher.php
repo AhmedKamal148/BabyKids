@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model
 {
-
     use HasFactory;
     protected $fillable =
         [
@@ -55,10 +54,5 @@ class Teacher extends Model
     }
 
 
- /*
-    public function allCourses()
-    {
-        return $this->belongsToMany(Course::class,'courses','course_id','id');
-    }
- */
+
 }

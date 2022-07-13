@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Activite;
+namespace App\Http\Requests\Location;
 
+use App\Models\Location;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateActiviteRequest extends FormRequest
+class UpdateLocationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class UpdateActiviteRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +24,6 @@ class UpdateActiviteRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return Location::UpdateLocationRequest();
     }
 }

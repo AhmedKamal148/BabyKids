@@ -20,7 +20,6 @@ trait ImagesTriat
         if(!is_null($fileExist))
         {
             unlink(public_path($fileExist));
-
         }
 
 

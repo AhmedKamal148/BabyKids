@@ -4,9 +4,12 @@ use App\Http\Controllers\AdminControllers\ActivityController;
 use App\Http\Controllers\AdminControllers\AdminHomeController;
 use App\Http\Controllers\AdminControllers\AuthController;
 use App\Http\Controllers\AdminControllers\CourseController;
+use App\Http\Controllers\AdminControllers\EventController;
 use App\Http\Controllers\AdminControllers\FaqController;
+use App\Http\Controllers\AdminControllers\LocationController;
 use App\Http\Controllers\AdminControllers\SliderController;
 use App\Http\Controllers\AdminControllers\TeacherController;
+use App\Http\Controllers\UserControllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,12 +25,8 @@ use Illuminate\Support\Facades\Route;
 */
 /********************************************************************************************/
 /*****************************        User            ***************************************/
-Route::get('/', function () {
-    return view('User.pages.home');
-})->name('User.Home');
+Route::get('/',[ HomeController::class,'index'])->name('User.home');
 /********************************************************************************************/
-
-
 
 
 
@@ -65,10 +64,10 @@ Route::group(['prefix'=>'admin' , 'as' =>'admin.','middleware'=>'auth' ],functio
 
     Route::group(['prefix'=> 'slider','as' => 'slider.','middleware'=>'auth'],function()
     {
-        Route::get('',                     [SliderController::class,'index'])->name('all');
+        Route::get('',                     [SliderController::class,'index'])-> name('all');
         Route::get('create',               [SliderController::class,'create'])->name('create');
-        Route::post('store',               [SliderController::class,'store'])->name('store');
-        Route::get('edit/{sliderId}',      [SliderController::class,'edit'])->name('edit');
+        Route::post('store',               [SliderController::class,'store'])-> name('store');
+        Route::get('edit/{sliderId}',      [SliderController::class,'edit'])->  name('edit');
         Route::put('update',               [SliderController::class,'update'])->name('update');
         Route::delete('delete',            [SliderController::class,'delete'])->name('delete');
     });
@@ -78,7 +77,6 @@ Route::group(['prefix'=>'admin' , 'as' =>'admin.','middleware'=>'auth' ],functio
     Route::group(['prefix'=>'teacher', 'as' => 'teacher.'],function()
     {
         Route::get('',                     [TeacherController::class,'index'])->name('all');
-        Route::get('teachers',             [TeacherController::class,'teacher']);
         Route::get('create',               [TeacherController::class,'create'])->name('create');
         Route::post('store',               [TeacherController::class,'store'])->name('store');
         Route::get('edit/{teacher_id}',    [TeacherController::class,'edit'])->name('edit');
@@ -98,15 +96,39 @@ Route::group(['prefix'=>'admin' , 'as' =>'admin.','middleware'=>'auth' ],functio
     });
     /********************************************************************************************/
     /*****************************        Activties            **********************************/
-    Route::group(['prefix'=>'activite', 'as' => 'activite.'],function()
+    Route::group(['prefix'=>'activity', 'as' => 'activity.'],function()
     {
         Route::get('',                    [ActivityController::class,'index'])->name('all');
         Route::get('create',              [ActivityController::class,'create'])->name('create');
         Route::post('store',              [ActivityController::class,'store'])->name('store');
-        Route::get('edit/{activite_id}',  [ActivityController::class,'edit'])->name('edit');
+        Route::get('edit/{activity_id}',  [ActivityController::class,'edit'])->name('edit');
         Route::put('update',              [ActivityController::class,'update'])->name('update');
         Route::delete('delete',           [ActivityController::class,'delete'])->name('delete');
     });
+    /********************************************************************************************/
+    /********************************************************************************************/
+    /*****************************        Event                 *********************************/
+    Route::group(['prefix' => 'event' , 'as' => 'event.'],function()
+    {
+        Route::get('',                     [EventController::class,'index'])->name('all');
+        Route::get('create',               [EventController::class,'create'])->name('create');
+        Route::post('store',               [EventController::class,'store'])->name('store');
+        Route::get('edit/{event_id}',      [EventController::class,'edit'])->name('edit');
+        Route::put('update',               [EventController::class,'update'])->name('update');
+        Route::delete('delete',            [EventController::class,'delete'])->name('delete');
+    });
+    /********************************************************************************************/
+    /********************************************************************************************/
+    /*****************************        Location              *********************************/
+        Route::group(['prefix' => 'location' , 'as' => 'location.'],function()
+        {
+            Route::get('',                      [LocationController::class,'index'])->name('all');
+            Route::get('create',                [LocationController::class,'create'])->name('create');
+            Route::post('store',                 [LocationController::class,'store'])->name('store');
+            Route::get('edit/{location_id}',    [LocationController::class,'edit'])->name('edit');
+            Route::put('update',                [LocationController::class,'update'])->name('update');
+            Route::delete('delete',                [LocationController::class,'delete'])->name('delete');
+        });
     /********************************************************************************************/
 });
 

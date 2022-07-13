@@ -77,11 +77,28 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin.activite.all')}}" class="nav-link ">
+                    <a href="{{route('admin.activity.all')}}" class="nav-link">
                         <i class="nav-icon fas fa-bolt"></i>
-
                         <p>
                             Activite
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{route('admin.event.all')}}" class="nav-link">
+                        <i class="nav-icon fas fa-calendar-alt"></i>
+                        <p>
+                            Event
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.location.all')}}" class="nav-link">
+
+                        <i class="nav-icon fas fa-map-marker-alt"></i>
+                        <p>
+                            Location
                         </p>
                     </a>
                 </li>

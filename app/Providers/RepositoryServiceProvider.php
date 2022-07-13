@@ -13,7 +13,6 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
       $this->app->bind(
 
            'App\Http\Interfaces\AdminHomeInterface',
@@ -46,6 +45,19 @@ class RepositoryServiceProvider extends ServiceProvider
           'App\Http\Interfaces\AdminActivityInterface',
           'App\Http\Repositories\AdminActivityRepository'
       );
+        $this->app->bind(
+            'App\Http\Interfaces\AdminEventInterface',
+            'App\Http\Repositories\AdminEventRepository'
+        );
+        $this->app->bind(
+            'App\Http\Interfaces\AdminLocationInterface',
+            'App\Http\Repositories\AdminLocationRepository'
+        );
+      $this->app->bind(
+          'App\Http\Interfaces\UserHomeInterface',
+          'App\Http\Repositories\UserHomeRepository'
+      );
+
     }
 
     /**

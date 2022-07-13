@@ -30,15 +30,12 @@
                                                         <b>Course Name</b> <span class="float-right">Students</span>
                                                         </div>
                                                     </li>
-                                                    @foreach($courses as $course)
-                                                        @if($course->id == $teacher->course_id)
                                                     <li class="list-group-item">
                                                         <div class="card-body ">
-                                                        <b>{{$course->name}}</b> <a class="float-right active">1,322</a>
+                                                            <b>{{$teacher->course->name}}</b>
+                                                            <a class="float-right active">1,322</a>
                                                         </div>
                                                     </li>
-                                                        @endif
-                                                    @endforeach
 
                                                 </ul>
                                                 </div>
