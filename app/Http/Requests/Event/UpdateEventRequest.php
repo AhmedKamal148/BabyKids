@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Event;
 
+use App\Models\Event;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateEventRequest extends FormRequest
@@ -13,7 +14,7 @@ class UpdateEventRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +24,6 @@ class UpdateEventRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return Event::UpdateEventRequest();
     }
 }

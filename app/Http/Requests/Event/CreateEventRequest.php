@@ -24,6 +24,9 @@ class CreateEventRequest extends FormRequest
      */
     public function rules()
     {
-        return Event::CreateEventRequest();
+        return array_merge(Event::CreateEventRequest(),
+        [
+            'location_id' => 'required|exists:locations,id',
+        ]);
     }
 }

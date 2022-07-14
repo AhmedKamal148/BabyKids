@@ -16,7 +16,6 @@ trait ImagesTriat
     private function UploadImage($file,$fileName,$path,$fileExist = null): void
     {
         $file->move(public_path('images/' . $path),$fileName);
-
         if(!is_null($fileExist))
         {
             unlink(public_path($fileExist));
